@@ -2,16 +2,15 @@
 from googleapiclient.discovery import build
 import streamlit as st
 import pandas as pd
-import os
 
 conn = st.connection('mysql', type='sql')
 api_service_name = "youtube"
 api_version = "v3"
 Api_key = "AIzaSyDYOhyvfSsKVivdTyHhuqzNzkbzB_QZQzM" 
 youtube = build(api_service_name, api_version, developerKey = Api_key)
-flag = None
+
 if 'flag' not in st.session_state:
-    st.session_state['flag'] =False
+    st.session_state[8'flag'] =False
 if 'channelData' not in st.session_state:
     st.session_state['channelData'] = []
 st.write("## Youtube Data Harvesting and Warehousing")
