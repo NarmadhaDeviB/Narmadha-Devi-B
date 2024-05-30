@@ -12,7 +12,7 @@ Api_key = "AIzaSyDYOhyvfSsKVivdTyHhuqzNzkbzB_QZQzM"
 youtube = build(api_service_name, api_version, developerKey = Api_key)
 
 if 'flag' not in st.session_state:
-    st.session_state[8'flag'] =False
+    st.session_state['flag'] =False
 if 'channelData' not in st.session_state:
     st.session_state['channelData'] = []
 st.write("## Youtube Data Harvesting and Warehousing")
