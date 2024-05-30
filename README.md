@@ -1,4 +1,4 @@
-**YouTube Data Harvesting and Warehousing Using SQL and Stremlit **
+**YouTube Data Harvesting and Warehousing Using SQL and Stremlit *
 Aim 
   To create a Stramlit application that will allows users to access and anlayse data from multiple YouTube channels. And it contains Channel name, Subsceibes, Total video count, Video Id, Likes, Comments of each video which was derived using Google API. Then it will store the data in a MySQL.
   Skills take away:
