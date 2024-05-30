@@ -1,8 +1,10 @@
-
+# Input Necessary Libraries 
 from googleapiclient.discovery import build
 import streamlit as st
 import pandas as pd
+import mysql.connector
 
+# Connent to MySQL database
 conn = st.connection('mysql', type='sql')
 api_service_name = "youtube"
 api_version = "v3"
@@ -15,6 +17,8 @@ if 'channelData' not in st.session_state:
     st.session_state['channelData'] = []
 st.write("## Youtube Data Harvesting and Warehousing")
 searchTxt = st.text_input('Channel id:')
+
+# Streamlit app code 
 def onSearchClick():
     st.session_state.flag = True
 searchBtn = st.button("Search", on_click=onSearchClick)
@@ -88,6 +92,7 @@ if st.session_state.flag == True:
             response = conn.query(query,params={"channelId":searchRes['channel_id']})
             response
 
+# FAQs 
 st.write("""### FAQs""")
 with st.expander("1. What are the names of all the videos and their corresponding channels?"):
     query = "SELECT channelTitle, title FROM youtube.video_infos;"
