@@ -75,22 +75,34 @@ if st.session_state.flag == False:
 
 if st.session_state.flag == True:
     if searchTxt:
-        searchRes = searchById(searchTxt)
-        if searchRes != None:
-
-            st.write("Channel_Name : "+searchRes['channel_name']+' \n\r '+
-    "Channel Id: "+searchRes['channel_id']+' \n\r '+
-    "Subscription_Count: "+str(searchRes ['channale_sub'])+' \n\r '+
-    "Channel_Views: "+str(searchRes ['channel_viewCount'])+' \n\r '+
-    "Channel_Description: "+searchRes ['channel_description']+' \n\r '+
-    "Channel_Published : "+searchRes ['channel_publishedAt']+' \n\r '+
-    "Channel_Totalvideo : "+str(searchRes ['channel_totalvideos'])+' \n\r '
-   
+        request = youtube.channels().list(
+        part="snippet,ContentDetails,statistics",
+        id=searchTxt
     )
-            
-            query = "Select * from youtube.video_infos where channel_id = :channelId"
-            response = conn.query(query,params={"channelId":searchRes['channel_id']})
-            response
+        response = request.execute()
+        data = {
+            'channel_name': response['items'][0]['snippet']['title'],
+            'channel_id' :searchTxt,
+            'channel_totalvideos': response['items'][0]['statistics']['videoCount'],
+            'channel_description': response['items'][0]['snippet']['description'],
+            'channel_publishedAt': response['items'][0]['snippet']['publishedAt'],
+            'channel_playlists': response['items'][0]['contentDetails']['relatedPlaylists']['uploads'],
+            'channel_viewCount': response['items'][0]['statistics']['viewCount'],
+            'channale_sub': response['items'][0]['statistics']['subscriberCount']
+            }
+    
+        if data != None:
+
+                st.write("Channel_Name : "+data['channel_name']+' \n\r '+
+        "Channel Id: "+data['channel_id']+' \n\r '+
+        "Subscription_Count: "+str(data ['channale_sub'])+' \n\r '+
+        "Channel_Views: "+str(data ['channel_viewCount'])+' \n\r '+
+        "Channel_Description: "+data ['channel_description']+' \n\r '+
+        "Channel_Published : "+data ['channel_publishedAt']+' \n\r '+
+        "Channel_Totalvideo : "+str(data ['channel_totalvideos'])+' \n\r '
+    
+        )
+        print(data)
 
 # FAQs 
 st.write("""### FAQs""")
