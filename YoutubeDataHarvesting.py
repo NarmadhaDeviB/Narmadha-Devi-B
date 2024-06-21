@@ -22,7 +22,7 @@ api_version = "v3"
 Api_key = "AIzaSyDYOhyvfSsKVivdTyHhuqzNzkbzB_QZQzM" 
 youtube = build(api_service_name, api_version, developerKey = Api_key)
 
-mysql = sql.connect(host = "localhost",user= "root",password = "mysqlroot",database ="youtube")
+mysql = sql.connect(host = "localhost",user= "root",password = "*****",database ="youtube")
 cursor = mysql.cursor()
 
 # HOME PAGE
